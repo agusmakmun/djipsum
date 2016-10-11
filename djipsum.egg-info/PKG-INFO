@@ -1,0 +1,78 @@
+Metadata-Version: 1.1
+Name: djipsum
+Version: 1.0.0
+Summary: Plugin to generate the lorem ipsum for django model
+Home-page: https://github.com/agusmakmun/djipsum/
+Author: Agus Makmun (Summon Agus)
+Author-email: agus@python.web.id
+License: MIT
+Download-URL: https://github.com/agusmakmun/djipsum/tarball/v1.0.0
+Description: Djipsum
+        ====================================
+        
+        Plugin to generate the lorem ipsum for django model
+        
+        
+        Install
+        ------------
+        
+        Djipsum is available directly from `PyPI`_:
+        
+        ::
+        
+            $ pip install djipsum
+        
+        
+        Usage
+        ------------
+        
+        ::
+        
+            usage: manage.py djipsum [-h] [--version]
+                                     [-dv] [--app APP] [--model MODEL] [--max MAX]
+        
+            To generate awesome lorem ipsum for your model class!
+        
+            optional arguments:
+              -h, --help            show this help message and exit
+              --version             show program's version number and exit
+        
+              -dv, --djipsum_version
+                                    Show djipsum version and exit.
+              --app APP             The APP name.
+              --model MODEL         The Model Class name.
+              --max int(MAX)        Maximum generate lorem ipsum.
+        
+        
+        Example
+        ------------
+        
+        ::
+        
+            # Default 10 objects
+            $ ./manage.py djipsum --app testapp --model TestField
+        
+            # Custom Maximum objects
+            $ ./manage.py djipsum --app testapp --model TestField --max=5
+        
+        
+        License
+        ------------
+        
+        - `MIT`_
+        
+        
+        .. _PyPI: https://pypi.python.org/pypi/djisum
+        .. _MIT: https://github.com/agusmakmun/djisum/blob/master/LICENSE
+        
+Keywords: Djipsum,Django Ipsum,Django Lorem Ipsum,Django Model
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
