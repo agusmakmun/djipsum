@@ -1,4 +1,5 @@
 __pycache__
 build/
 dist/
-djipsum.egg.info/
+*.egg-info/
+*.pypirc

@@ -51,5 +51,5 @@ License
 - `MIT`_
 
 
-.. _PyPI: https://pypi.python.org/pypi/djisum
-.. _MIT: https://github.com/agusmakmun/djisum/blob/master/LICENSE
+.. _PyPI: https://pypi.python.org/pypi/djipsum
+.. _MIT: https://github.com/agusmakmun/djipsum/blob/master/LICENSE
