@@ -14,7 +14,7 @@ Djipsum is available directly from `PyPI`_:
     $ pip install djipsum
 
 
-** ^). ** And don't forget to add ``djipsum`` to your ``INSTALLED_APPS`` setting (without migrations).
+***).** And don't forget to add ``djipsum`` to your ``INSTALLED_APPS`` setting (without migrations).
 
 
 Usage
