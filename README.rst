@@ -3,7 +3,7 @@ Djipsum
 
 Plugin to generate the lorem ipsum for django model
 
-.. image:: http://i.imgur.com/1zYLXwW.png
+.. image:: http://i.imgur.com/8vg0KoC.png
 
 
 Install
