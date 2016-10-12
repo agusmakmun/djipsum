@@ -127,3 +127,4 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(tempfile.gettempdir(), 'djipsum_static')
 MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'djipsum_media')
+FILE_PATH_FIELD_DIRECTORY = MEDIA_ROOT
