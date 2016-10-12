@@ -20,7 +20,7 @@ Djipsum is available directly from `PyPI`_:
 Requirement
 ------------
 
-.. ``Django>=1.10.1``
+* ``Django>=1.10.1``
 
 
 Usage
