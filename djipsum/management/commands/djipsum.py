@@ -39,6 +39,8 @@ class Command(BaseCommand):
 
         if options['djipsum_version']:
             return __VERSION__
+        elif app == None:
+            return self.print_help('djipsum', '-h')
 
         try:
             model_class = apps.get_model(app_label=app, model_name=model)
@@ -50,10 +52,14 @@ class Command(BaseCommand):
             {'field_type': f.__class__.__name__, 'field_name': f.name}
             for f in model_class._meta.fields if f.name not in exclude
         ]
-        validated_model_fields = create_validated_fields(model_class, fields, maximum)
+        validated_model_fields = create_validated_fields(
+            model_class,
+            fields,
+            maximum
+        )
 
         def loremInfo():
-            return """[+] Successfully generate the lorem ipsum for `{0}`\n\n{1}\n""".format(
+            return """\n[+] Successfully generate the lorem ipsum for `{0}`\n\n{1}\n""".format(
                 model_class,
                 validated_model_fields
             )

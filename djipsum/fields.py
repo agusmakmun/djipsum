@@ -11,52 +11,52 @@ def randomize(list):
 
 def randomCharField():
     lst = [
-        'Enthusiastically whiteboard synergistic methods.',
-        'Authoritatively scale progressive meta-services through.',
-        'Objectively implement client-centered supply chains via stand-alone.',
-        'Phosfluorescently productize accurate products after cooperative results.'
-        'Appropriately drive cutting-edge systems before optimal scenarios.',
-        'Uniquely productize viral ROI for competitive e-markets.'
-        'Uniquely repurpose high-quality models vis-a-vis.',
-        'Django is Fucking Awesome? Yes'
+        "Enthusiastically whiteboard synergistic methods",
+        "Authoritatively scale progressive meta-services through",
+        "Objectively implement client-centered supply chains via stand-alone",
+        "Phosfluorescently productize accurate products after cooperative results"
+        "Appropriately drive cutting-edge systems before optimal scenarios",
+        "Uniquely productize viral ROI for competitive e-markets"
+        "Uniquely repurpose high-quality models vis-a-vis",
+        "Django is Fucking Awesome? Yes"
     ]
     return randomize(lst)
 
 
 def randomEmailField():
     lst = [
-        'admin@gmail.com',
-        'sample@gmail.com',
-        'django@site.com',
-        'test@site.com',
+        "admin@gmail.com",
+        "sample@gmail.com",
+        "django@site.com",
+        "test@site.com",
     ]
     return randomize(lst)
 
 
 def randomFileField():
     lst = [
-        'file.zip',
-        'awesomefile.tar.gz',
-        'samplefile.docx',
-        'djipsum.pdf'
+        "file.zip",
+        "awesomefile.tar.gz",
+        "samplefile.docx",
+        "djipsum.pdf"
     ]
     return randomize(lst)
 
 
 def randomImageField():
     lst = [
-        'avatar.jpg',
-        'sampleimage.png',
-        'djipsum.jpeg'
+        "avatar.jpg",
+        "sampleimage.png",
+        "djipsum.jpeg"
     ]
     return randomize(lst)
 
 
 def randomSlugField():
     lst = [
-        'sample-slug-{}'.format(uuid.uuid4().hex),
-        'awesome-djipsum-{}'.format(uuid.uuid4().hex),
-        'unique-slug-{}'.format(uuid.uuid4().hex)
+        "sample-slug-{}".format(uuid.uuid4().hex),
+        "awesome-djipsum-{}".format(uuid.uuid4().hex),
+        "unique-slug-{}".format(uuid.uuid4().hex)
     ]
     return randomize(lst)
 
@@ -92,11 +92,11 @@ def randomTextField():
 
 def randomURLField():
     lst = [
-        'https://djangoproject.org',
-        'https://python.web.id',
-        'http://sample.com',
-        'https://google.com',
-        'http://stackoverflow.com'
+        "https://djangoproject.com",
+        "https://python.web.id",
+        "http://sample.com",
+        "https://google.com",
+        "http://stackoverflow.com"
     ]
     return randomize(lst)
 
@@ -132,6 +132,7 @@ def create_validated_fields(model_class, fields, maximum):
     for n in range(maximum):
         data_dict = {}
         for field in fields:
+
             def default_assign(func):
                 data_dict[field['field_name']] = func
 

@@ -52,7 +52,10 @@ class TestField(models.Model):
     #)
 
     def __str__(self):
-        return "{0} with id {1}".format(self.test_CharField, self.pk)
+        return "{0} - with id {1}".format(
+            self.test_CharField,
+            self.pk
+        )
 
     class Meta:
         ordering = ['-test_DateTimeField']

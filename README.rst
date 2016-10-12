@@ -17,6 +17,12 @@ Djipsum is available directly from `PyPI`_:
 ***).** And don't forget to add ``djipsum`` to your ``INSTALLED_APPS`` setting (without migrations).
 
 
+Requirement
+------------
+
+.. ``Django>=1.10.1``
+
+
 Usage
 ------------
 
