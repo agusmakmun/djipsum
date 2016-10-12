@@ -9,18 +9,31 @@ def randomize(list):
     return random.choice(list)
 
 
-def randomCharField():
-    lst = [
-        "Enthusiastically whiteboard synergistic methods",
-        "Authoritatively scale progressive meta-services through",
-        "Objectively implement client-centered supply chains via stand-alone",
-        "Phosfluorescently productize accurate products after cooperative results"
-        "Appropriately drive cutting-edge systems before optimal scenarios",
-        "Uniquely productize viral ROI for competitive e-markets"
-        "Uniquely repurpose high-quality models vis-a-vis",
-        "Django is Fucking Awesome? Yes"
-    ]
-    return randomize(lst)
+def randomCharField(model_class, field_name):
+    try:
+        # Checking if `field_name` has choices.
+        # Then, returning random value from it.
+        # Result of: `available_choices`
+        # [
+        #   ('project', 'I wanna to talk about project'),
+        #   ('feedback', 'I want to report a bugs or give feedback'),
+        #   ('hello', 'I just want to say hello')
+        # ]
+        available_choices = model_class._meta.get_field(field_name).get_choices()[1:]
+        return randomize([ci[0] for ci in available_choices])
+
+    except AttributeError:
+        lst = [
+            "Enthusiastically whiteboard synergistic methods",
+            "Authoritatively scale progressive meta-services through",
+            "Objectively implement client-centered supply chains via stand-alone",
+            "Phosfluorescently productize accurate products after cooperative results"
+            "Appropriately drive cutting-edge systems before optimal scenarios",
+            "Uniquely productize viral ROI for competitive e-markets"
+            "Uniquely repurpose high-quality models vis-a-vis",
+            "Django is Fucking Awesome? Yes"
+        ]
+        return randomize(lst)
 
 
 def randomEmailField():
@@ -142,7 +155,7 @@ def create_validated_fields(model_class, fields, maximum):
             if field['field_type'] == 'BooleanField':  # True/False
                 default_assign(randomize([True, False]))
             elif field['field_type'] == 'CharField':  # randomCharField()
-                string_assign(randomCharField())
+                string_assign(randomCharField(model_class, field['field_name']))
             elif field['field_type'] == 'DateField':  # '2016-10-11'
                 string_assign(str(datetime.datetime.now().date()))
             elif field['field_type'] == 'DateTimeField':  # '2016-10-11 00:44:08.864285'
