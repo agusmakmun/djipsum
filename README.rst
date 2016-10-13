@@ -56,6 +56,39 @@ Example
     $ ./manage.py djipsum --app testapp --model TestField --max=5
 
 
+Supported Fields
+------------
+
+::
+
+    {
+      'ForeignKey': <User: admin>,
+      'FileField': 'file.zip',
+      'IntegerField': -1712115729,
+      'TextField': "Conveniently facilitate best-of-breed experiences via integrated web-readiness.",
+      'SmallIntegerField': 13176,
+      'BigIntegerField': 8202207420457970878,
+      'BinaryField': b'djipsum is awesome',
+      'UUIDField': 'bbec46c4bace5426908f386c76ea50ed',
+      'URLField': 'https://djangoproject.com',
+      'GenericIPAddressField': '66.249.65.54',
+      'DateField': '2016-10-12',
+      'DateTimeField': '2016-10-12 17:35:15.934491',
+      'TimeField': '2016-10-12',
+      'DecimalField': 10.7,
+      'DurationField': datetime.timedelta(1),
+      'PositiveIntegerField': 1459670713,
+      'NullBooleanField': None,
+      'SlugField': 'unique-slug-e9029f1edd5b45379f99d190f156a35f',
+      'BooleanField': True,
+      'FloatField': 0.69,
+      'EmailField': 'test@site.com',
+      'PositiveSmallIntegerField': 18723,
+      'CharField': 'Phosfluorescently productize accurate products',
+      'ImageField': 'sampleimage.png'
+    }
+
+
 License
 ------------
 

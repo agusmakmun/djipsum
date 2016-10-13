@@ -250,6 +250,11 @@ def getOrCreateForeignKey(model_class, field_name):
     # Eg: <class 'django.contrib.auth.models.User'>
     related_model = instance.related_model().__class__
 
+    # Trying to get the first object
+    first_obj = related_model.objects.first()
+    if first_obj is not None:
+        return first_obj
+
     # Returning first object from tuple `(<User: user_name>, False)`
     return related_model.objects.get_or_create(pk=1)[0]
 
@@ -345,7 +350,7 @@ def create_validated_fields(model_class, fields, maximum):
 
         """Example output of: print(data_dict)
         {
-          'test_ForeignKey': <User: agaust>,
+          'test_ForeignKey': <User: admin>,
           'test_FileField': 'file.zip',
           'test_IntegerField': -1712115729,
           'test_TextField': "Conveniently facilitate best-of-breed experiences via integrated web-readiness.",
