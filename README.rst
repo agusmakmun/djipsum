@@ -1,6 +1,10 @@
 Djipsum
 ====================================
 
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg   :target: https://raw.githubusercontent.com/agusmakmun/djipsum/master/LICENSE
+.. image:: https://img.shields.io/pypi/pyversions/Django.svg?maxAge=2592000   :target: https://github.com/agusmakmun/djipsum
+.. image:: https://img.shields.io/pypi/v/nine.svg?maxAge=2592000   :target: https://pypi.python.org/pypi/djipsum
+
 Plugin to generate the lorem ipsum for django model
 
 .. image:: http://i.imgur.com/8vg0KoC.png
@@ -30,8 +34,8 @@ Usage
 
 ::
 
-    usage: manage.py djipsum [-h]
-                             [-dv] [--app APP] [--model MODEL] [--max MAX]
+    usage: manage.py djipsum [-h] [-dv]
+                             [--app APP] [--model MODEL] [--max MAX]
 
     To generate awesome lorem ipsum for your model class!
 

@@ -4,7 +4,7 @@ from django.apps import apps
 from django.core.management.base import BaseCommand, CommandError
 
 from djipsum import __VERSION__
-from djipsum.fields import create_validated_fields
+from djipsum.fields import DjipsumFields
 
 
 class Command(BaseCommand):
@@ -52,11 +52,11 @@ class Command(BaseCommand):
             {'field_type': f.__class__.__name__, 'field_name': f.name}
             for f in model_class._meta.fields if f.name not in exclude
         ]
-        validated_model_fields = create_validated_fields(
+        validated_model_fields = DjipsumFields(
             model_class,
             fields,
             maximum
-        )
+        ).create_validated_fields()
 
         def loremInfo():
             return """\n[+] Successfully generate the lorem ipsum for `{0}`\n\n{1}\n""".format(
