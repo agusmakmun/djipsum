@@ -1,8 +1,11 @@
 Djipsum
 ====================================
 
-.. image:: https://img.shields.io/badge/license-MIT-blue.svg?maxAge=2592000 :target: https://raw.githubusercontent.com/agusmakmun/djipsum/master/LICENSE
-.. image:: https://img.shields.io/pypi/pyversions/Django.svg?maxAge=2592000 :target: https://github.com/agusmakmun/djipsum
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg?maxAge=2592000
+   :target: https://raw.githubusercontent.com/agusmakmun/djipsum/master/LICENSE
+
+.. image:: https://img.shields.io/pypi/pyversions/Django.svg?maxAge=2592000
+   :target: https://github.com/agusmakmun/djipsum
 
 Plugin to generate the lorem ipsum for django model
 
