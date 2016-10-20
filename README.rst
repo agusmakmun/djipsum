@@ -13,7 +13,7 @@ Plugin to generate the lorem ipsum for django model
 
 
 Install
-------------
+----------------------
 
 Djipsum is available directly from `PyPI`_:
 
@@ -26,13 +26,13 @@ Djipsum is available directly from `PyPI`_:
 
 
 Requirement
-------------
+----------------------
 
 * ``Django>=1.10.1``
 
 
 Usage
-------------
+----------------------
 
 ::
 
@@ -51,7 +51,7 @@ Usage
 
 
 Example
-------------
+----------------------
 
 ::
 
@@ -63,7 +63,7 @@ Example
 
 
 Supported Fields
-------------
+----------------------
 
 ::
 
@@ -96,7 +96,7 @@ Supported Fields
 
 
 License
-------------
+----------------------
 
 - `MIT`_
 

@@ -48,9 +48,12 @@ class Command(BaseCommand):
             raise CommandError(e)
 
         exclude = ['pk', 'id', 'objects']
+        # removing `model_class._meta.fields` to `model_class._meta.get_fields()
+        # to get all fields.`
+        # Ref: http://stackoverflow.com/a/3106314/6396981
         fields = [
             {'field_type': f.__class__.__name__, 'field_name': f.name}
-            for f in model_class._meta.fields if f.name not in exclude
+            for f in model_class._meta.get_fields() if f.name not in exclude
         ]
         validated_model_fields = DjipsumFields(
             model_class,

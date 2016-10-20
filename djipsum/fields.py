@@ -262,31 +262,51 @@ class DjipsumFields(object):
     def addManyToManyField(self, model_class, field_name, rand_range_id):
         """
         Return random list of `ManyToManyField`.
+        To save the ManyToManyField for the latest/previous object.
         But not fixed yet.
         """
         instance = getattr(model_class, field_name)
-        related_model = instance.field.related_model().__class__
+        # related_model = instance.field.related_model().__class__
         # queryset = related_model.objects.all()
 
         # Getting the latest/previous object for this `model_class`
         # Because the `ManyToManyField` need the specific pk/id to add.
-        latest_obj = model_class.objects.latest('pk')
+        from django.core.exceptions import ObjectDoesNotExist
+        from django.db.utils import IntegrityError
+
+        try:
+            latest_obj = model_class.objects.latest('pk')
+        except ObjectDoesNotExist:
+            latest_obj = model_class.objects.get_or_create(pk=1)
+        except IntegrityError:
+            latest_obj = model.objects.get_or_create(pk=uuid.uuid4().hex)
+
         instance_m2m = getattr(latest_obj, field_name)
         # queryset = instance_m2m.model.objects.all()
 
-        instance_m2m.add(
-            set(
-                rel_obj for rel_obj in instance_m2m.model.objects.all()
-                if u.pk in rand_range_id
-            )
-        )
-        # instance_m2m.save_m2m()
-        # for pk in rand_range_id:
-        #     instance_m2m.add(
-        #         related_model.objects.get_or_create(pk=pk)[0]
-        #     )
-        #     # instance_m2m.save()
-        return instance_m2m
+        # I don't know why it still doesn't work well.
+        """
+        >>> from django.apps import apps
+        >>> model_class = apps.get_model('testapp', 'TestField')
+        >>> latest_obj = model_class.objects.latest('pk')
+        >>> instance_m2m = getattr(latest_obj, 'test_ManyToManyField')
+        >>>
+        >>> related_objects = [rel_obj for rel_obj in instance_m2m.model.objects.all() if rel_obj.pk in [1,]]
+        >>> instance_m2m.add(*related_objects)
+        >>> instance_m2m.all()
+        <QuerySet [<User: admin>]>
+        >>>
+        >>> latest_obj.save()
+        >>> latest_obj.test_ManyToManyField.all()
+        <QuerySet [<User: admin>]>
+        """
+        list_objects = [
+            rel_obj for rel_obj in instance_m2m.model.objects.all()
+            if rel_obj.pk in rand_range_id
+        ]
+        instance_m2m.add(*list_objects)
+        # latest_obj.save()
+        return instance_m2m.all()
 
     def create_validated_fields(self):
         """
