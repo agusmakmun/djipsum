@@ -14,7 +14,11 @@ class TestField(models.Model):
     test_BinaryField = models.BinaryField()
     test_BooleanField = models.BooleanField()
     test_CharField = models.CharField(max_length=200)
+
+    # CommaSeparatedIntegerField has been deprecated. Support for it (except in historical migrations) will be removed in Django 2.0.
+    # HINT: Use CharField(validators=[validate_comma_separated_integer_list]) instead.
     #test_CommaSeparatedIntegerField = models.CommaSeparatedIntegerField(max_length=200)
+
     test_DateField = models.DateField(auto_now_add=True)
     test_DateTimeField = models.DateTimeField(auto_now_add=True)
     test_DecimalField = models.DecimalField(max_digits=19, decimal_places=2, default=19.0)

@@ -251,62 +251,13 @@ class DjipsumFields(object):
         # Eg: <class 'django.contrib.auth.models.User'>
         related_model = instance.related_model().__class__
 
-        # Trying to get the first object
-        first_obj = related_model.objects.first()
-        if first_obj is not None:
-            return first_obj
+        # Trying to get random id from queryset.
+        objects = related_model.objects.all()
+        if objects.exists():
+            return self.randomize(objects)
 
         # Returning first object from tuple `(<User: user_name>, False)`
         return related_model.objects.get_or_create(pk=1)[0]
-
-    def addManyToManyField(self, model_class, field_name, rand_range_id):
-        """
-        Return random list of `ManyToManyField`.
-        To save the ManyToManyField for the latest/previous object.
-        But not fixed yet.
-        """
-        instance = getattr(model_class, field_name)
-        # related_model = instance.field.related_model().__class__
-        # queryset = related_model.objects.all()
-
-        # Getting the latest/previous object for this `model_class`
-        # Because the `ManyToManyField` need the specific pk/id to add.
-        from django.core.exceptions import ObjectDoesNotExist
-        from django.db.utils import IntegrityError
-
-        try:
-            latest_obj = model_class.objects.latest('pk')
-        except ObjectDoesNotExist:
-            latest_obj = model_class.objects.get_or_create(pk=1)
-        except IntegrityError:
-            latest_obj = model.objects.get_or_create(pk=uuid.uuid4().hex)
-
-        instance_m2m = getattr(latest_obj, field_name)
-        # queryset = instance_m2m.model.objects.all()
-
-        # I don't know why it still doesn't work well.
-        """
-        >>> from django.apps import apps
-        >>> model_class = apps.get_model('testapp', 'TestField')
-        >>> latest_obj = model_class.objects.latest('pk')
-        >>> instance_m2m = getattr(latest_obj, 'test_ManyToManyField')
-        >>>
-        >>> related_objects = [rel_obj for rel_obj in instance_m2m.model.objects.all() if rel_obj.pk in [1,]]
-        >>> instance_m2m.add(*related_objects)
-        >>> instance_m2m.all()
-        <QuerySet [<User: admin>]>
-        >>>
-        >>> latest_obj.save()
-        >>> latest_obj.test_ManyToManyField.all()
-        <QuerySet [<User: admin>]>
-        """
-        list_objects = [
-            rel_obj for rel_obj in instance_m2m.model.objects.all()
-            if rel_obj.pk in rand_range_id
-        ]
-        instance_m2m.add(*list_objects)
-        # latest_obj.save()
-        return instance_m2m.all()
 
     def create_validated_fields(self):
         """
@@ -335,7 +286,7 @@ class DjipsumFields(object):
                     default_assign(self.randomize([True, False]))
                 elif field['field_type'] == 'CharField':  # self.randomCharField()
                     string_assign(self.randomCharField(model_class, field['field_name']))
-                elif field['field_name'] == 'CommaSeparatedIntegerField':  # self.randomCommaSeparatedIntegerField()
+                elif field['field_type'] == 'CommaSeparatedIntegerField':  # self.randomCommaSeparatedIntegerField()
                     string_assign(self.randomCommaSeparatedIntegerField())
                 elif field['field_type'] == 'DateField':  # '2016-10-11'
                     string_assign(str(datetime.datetime.now().date()))
@@ -377,48 +328,35 @@ class DjipsumFields(object):
                     string_assign(self.randomUUIDField())
                 elif field['field_type'] == 'ForeignKey':  # self.getOrCreateForeignKey()
                     default_assign(self.getOrCreateForeignKey(model_class, field['field_name']))
-
-                # Relationship
                 # elif field['field_type'] == 'OneToOneField':  # pk/id -> not fixed yet.
                 #    default_assign(self.randomize([1, ]))
                 # Unsolved: need specific pk/id
-                elif field['field_type'] == 'ManyToManyField':  # random list values from 1 to 5
-                    default_assign(
-                        self.addManyToManyField(
-                            model_class,
-                            field['field_name'],
-                            random.sample(range(1, 6), 5)
-                        )
-                    )
 
-            """Example output of: print(data_dict)
-            {
-              'test_ForeignKey': <User: admin>,
-              'test_FileField': 'file.zip',
-              'test_IntegerField': -1712115729,
-              'test_TextField': "Conveniently facilitate best-of-breed experiences via integrated web-readiness.",
-              'test_SmallIntegerField': 13176,
-              'test_BigIntegerField': 8202207420457970878,
-              'test_BinaryField': b'djipsum is awesome',
-              'test_UUIDField': 'bbec46c4bace5426908f386c76ea50ed',
-              'test_URLField': 'https://djangoproject.com',
-              'test_GenericIPAddressField': '66.249.65.54',
-              'test_DateField': '2016-10-12',
-              'test_DateTimeField': '2016-10-12 17:35:15.934491',
-              'test_TimeField': '2016-10-12',
-              'test_DecimalField': 10.7,
-              'test_DurationField': datetime.timedelta(1),
-              'test_PositiveIntegerField': 1459670713,
-              'test_NullBooleanField': None,
-              'test_SlugField': 'unique-slug-e9029f1edd5b45379f99d190f156a35f',
-              'test_BooleanField': True,
-              'test_FloatField': 0.69,
-              'test_EmailField': 'test@site.com',
-              'test_PositiveSmallIntegerField': 18723,
-              'test_CharField': 'Phosfluorescently productize accurate products',
-              'test_ImageField': 'sampleimage.png'
-            }"""
             obj = model_class.objects.create(**data_dict)
+
+            # Because the Relationship Model need specific id from the object,
+            # so, i handle it after created the object.
+            for field in fields:
+                if field['field_type'] == 'ManyToManyField':
+                    # Find the instance model field from `obj` already created before.
+                    instance_m2m = getattr(obj, field['field_name'])
+                    objects_m2m = instance_m2m.model.objects.all()
+
+                    # Djipsum only create the `ManyToManyField` if the related object is exists.
+                    if objects_m2m.exists():
+                        ids_m2m = [i.pk for i in objects_m2m]
+                        random_decission = random.sample(
+                            range(min(ids_m2m), max(ids_m2m)), max(ids_m2m) - 1
+                        )
+                        # Let me know if the `random_decission` has minimum objects to be choice.
+                        if len(random_decission) <= 2:
+                            random_decission = [self.randomize(ids_m2m)]
+                        related_objects = [
+                            rel_obj for rel_obj in objects_m2m
+                            if rel_obj.pk in random_decission
+                        ]
+                        # adding the `ManyToManyField`
+                        instance_m2m.add(*related_objects)
             try:
                 obj.save_m2m()
             except:
