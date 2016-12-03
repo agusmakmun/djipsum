@@ -11,7 +11,7 @@ setup(
     version=__VERSION__,
     url="https://github.com/agusmakmun/djipsum/",
     download_url="https://github.com/agusmakmun/djipsum/tarball/v{}".format(__VERSION__),
-    description="Plugin to generate the lorem ipsum for django model",
+    description="Plugin to generate the lorem ipsum (fake content) for django model",
     long_description=open("README.rst").read(),
     license="MIT",
     author=__AUTHOR__,
@@ -19,7 +19,7 @@ setup(
     keywords=["Djipsum", "Django Ipsum", "Django Lorem Ipsum", "Django Model"],
     zip_safe=False,
     include_package_data=True,
-    install_requires=["Django>=1.10.1"],
+    install_requires=["Django>=1.10.1", "Faker>=0.7.3"],
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",

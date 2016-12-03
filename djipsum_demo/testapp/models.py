@@ -7,6 +7,24 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 
+class TestFaker(models.Model):
+    user = models.ForeignKey(User)
+    title = models.CharField(max_length=200)
+    slug = models.SlugField()
+    categories = models.ManyToManyField(
+        User, related_name='categories_test'
+    )
+    description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    publish = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-created']
+
+
 class TestField(models.Model):
     # test_AutoField = models.AutoField()
     # test_BigAutoField = models.BigAutoField()

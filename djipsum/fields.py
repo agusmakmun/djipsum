@@ -241,7 +241,7 @@ class DjipsumFields(object):
 
     def getOrCreateForeignKey(self, model_class, field_name):
         """
-        Return the fist related object to set as default ForeignKey.
+        Return related random object to set as ForeignKey.
         """
         # Getting related object type
         # Eg: <django.db.models.fields.related.ForeignKey: test_ForeignKey>

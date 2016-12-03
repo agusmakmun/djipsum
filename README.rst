@@ -25,18 +25,11 @@ Djipsum is available directly from `PyPI`_:
 ***).** And don't forget to add ``djipsum`` to your ``INSTALLED_APPS`` setting (without migrations).
 
 
-Requirement
+Requirements
 ----------------------
 
 * ``Django>=1.10.1``
-
-
-I never test this tool with ``Django<=1.9.9``, but i think it should be work well..
-you can try with this to ignoring the requirment:
-
-::
-
-    $ pip install djipsum --no-dependencies
+* ``Faker>=0.7.3``
 
 
 Usage
@@ -68,6 +61,54 @@ Example
 
     # Custom Maximum objects
     $ ./manage.py djipsum --app testapp --model TestField --max=5
+
+
+API
+----------------------
+
+The Djipsum Faker Model providing additional library from `Faker`_ for more than efficient to use.
+
+**1. Basic API**
+
+::
+
+    >>> from djipsum.faker import FakerModel
+    >>> faker = FakerModel(app='app_name', model='ModelName')
+    >>> faker.fake_email() # From Djipsum
+    'admin@gmail.com'
+    >>> faker.fake.email() # From Faker Factory
+    'smithadrian@hotmail.com'
+    >>>
+
+**2. Example API Usage**
+
+::
+
+    >>> from djipsum.faker import FakerModel
+    >>> faker = FakerModel(app='app_blog', model='Post')
+    >>> for _ in range(2):
+    ...     fields = {
+    ...         'user': faker.fake_relations(
+    ...             type='fk',
+    ...             field_name='user'
+    ...         ),
+    ...         'title': faker.fake.text(max_nb_chars=100),
+    ...         'slug': faker.fake.slug(
+    ...             faker.fake.text(max_nb_chars=50)
+    ...         ),
+    ...         'categories': faker.fake_relations(
+    ...             type='m2m',
+    ...             field_name='categories'
+    ...         ),
+    ...         'description': ' '.join(faker.fake.paragraphs()),
+    ...         'created': str(faker.fake.date_time()),
+    ...         'publish': faker.fake_boolean(),
+    ...     }
+    ...     faker.create(fields)
+    ...
+    <Post: Sit sunt nam aperiam ratione consequatur. Animi cupiditate atque totam.>
+    <Post: Tempora porro sint quasi nisi totam doloremque repellat. Ducimus nesciunt impedit animi.>
+    >>>
 
 
 Supported Fields
@@ -114,3 +155,4 @@ License
 
 .. _PyPI: https://pypi.python.org/pypi/djipsum
 .. _MIT: https://github.com/agusmakmun/djipsum/blob/master/LICENSE
+.. _Faker: https://github.com/joke2k/faker
