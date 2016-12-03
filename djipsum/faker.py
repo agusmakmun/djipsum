@@ -245,7 +245,7 @@ class FakerModel(object):
         1. from Djipsum
             faker.fake_url()
         2. from Faker Factory
-            fake.url()
+            faker.fake.url()
         """
         return self.djipsum_fields().randomURLField()
 
@@ -261,7 +261,7 @@ class FakerModel(object):
         Return the dictionary of object/s relation
         to process the Relationship.
 
-        Example:
+        Example Output:
             {'type': 'fk', 'field_name': 'author'}, or
             {'type': 'm2m', 'field_name': 'categories'}
         """
@@ -274,7 +274,7 @@ class FakerModel(object):
         """
         Return related random object to set as ForeignKey.
 
-        Example:
+        Example Output:
             <User: username>
         """
         return self.djipsum_fields().getOrCreateForeignKey(
@@ -309,7 +309,9 @@ class FakerModel(object):
     def create(self, fields):
         """
         Create the object only once.
-        So, you need loope to usage.
+        So, you need loop to usage.
+
+        :param `fields` is dictionary fields.
         """
         try:
             # Cleaning the fields, and check if has `ForeignKey` type.
