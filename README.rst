@@ -1,13 +1,20 @@
 Djipsum
 ====================================
 
-.. image:: https://img.shields.io/badge/license-MIT-blue.svg?maxAge=2592000
+.. image:: https://img.shields.io/pypi/v/djipsum.svg?style=flat-square&label=version
+   :target: https://pypi.python.org/pypi/djipsum
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
    :target: https://raw.githubusercontent.com/agusmakmun/djipsum/master/LICENSE
 
-.. image:: https://img.shields.io/pypi/pyversions/Django.svg?maxAge=2592000
+.. image:: https://img.shields.io/pypi/pyversions/djipsum.svg?style=flat-square
    :target: https://github.com/agusmakmun/djipsum
 
-Plugin to generate the lorem ipsum for django model
+.. image:: https://img.shields.io/pypi/dm/djipsum.svg?style=flat-square
+   :target: https://pypi.python.org/pypi/djipsum
+
+
+Plugin to generate the lorem ipsum (fake content) for Django model, and uses `Faker Factory`_ package for API Faker Model.
 
 .. image:: http://i.imgur.com/8vg0KoC.png
 
@@ -22,7 +29,7 @@ Djipsum is available directly from `PyPI`_:
     $ pip install djipsum
 
 
-***).** And don't forget to add ``djipsum`` to your ``INSTALLED_APPS`` setting (without migrations).
+***).** And don't forget to add ``djipsum`` to your ``INSTALLED_APPS`` setting `(without migrations)`.
 
 
 Requirements
@@ -66,7 +73,7 @@ Example
 API
 ----------------------
 
-The Djipsum Faker Model providing additional library from `Faker`_ for more than efficient to use.
+The Djipsum Faker Model providing additional library from `Faker Factory`_ for more than efficient to use.
 
 **1. Basic API**
 
@@ -155,4 +162,4 @@ License
 
 .. _PyPI: https://pypi.python.org/pypi/djipsum
 .. _MIT: https://github.com/agusmakmun/djipsum/blob/master/LICENSE
-.. _Faker: https://github.com/joke2k/faker
+.. _Faker Factory: https://github.com/joke2k/faker
