@@ -204,7 +204,7 @@ class FakerModel(object):
         1. from Djipsum
             faker.fake_ipaddress()
         2. from Faker Factory
-            faker.fake.ipv4(), fake.ipv6()
+            faker.fake.ipv4(), faker.fake.ipv6()
         """
         return self.djipsum_fields().randomGenericIPAddressField()
 

@@ -44,18 +44,22 @@ Usage
 
 ::
 
-    usage: manage.py djipsum [-h] [-dv]
-                             [--app APP] [--model MODEL] [--max MAX]
+    usage: djipsum -h [-h] [-dv] [-auto] [-cg CUSTOM_GENERATOR]
+                      [--app APP] [--model MODEL] [--max MAX]
 
-    To generate awesome lorem ipsum for your model class!
+    To generate awesome lorem ipsum for your model!
 
     optional arguments:
       -h, --help            show this help message and exit
       -dv, --djipsum_version
-                            Show djipsum version and exit.
-      --app APP             The APP name.
-      --model MODEL         The Model Class name.
-      --max int(MAX)        Maximum generate lorem ipsum.
+                            Show djipsum version number and exit.
+      -auto, --auto_gen     Automatic generate lorem ipsum from custom generator
+                            class.
+      -cg, --custom_generator CUSTOM_GENERATOR
+                            Custom a function generator (full path) for auto-gen.
+      --app APP             The app name.
+      --model MODEL         The model class name.
+      --max MAX             Maximum generate lorem ipsum.
 
 
 Example
@@ -116,6 +120,63 @@ The Djipsum Faker Model providing additional library from `Faker Factory`_ for m
     <Post: Sit sunt nam aperiam ratione consequatur. Animi cupiditate atque totam.>
     <Post: Tempora porro sint quasi nisi totam doloremque repellat. Ducimus nesciunt impedit animi.>
     >>>
+
+
+**3. Using custom Management command**
+
+This an example to create custom special faker file as a tool for unittests.
+For example i need to save this script into file of ``app_blog.blogfaker.py``
+
+::
+
+    from djipsum.faker import FakerModel
+
+
+    def postfaker(maximum=10):
+        """
+        Sample custom class generator.
+        Djipsum already handled with `--max` command.
+        But, recomended to set default integer `maximum` like above.
+        """
+        faker = FakerModel(
+            app='app_blog',
+            model='Post'
+        )
+        object_list = [] # for print out after created the objects.
+
+        for _ in range(maximum):
+            fields = {
+                'user': faker.fake_relations(
+                    type='fk',
+                    field_name='user'
+                ),
+                'title': faker.fake.text(max_nb_chars=100),
+                'slug': faker.fake.slug(
+                    faker.fake.text(max_nb_chars=50)
+                ),
+                'categories': faker.fake_relations(
+                    type='m2m',
+                    field_name='categories'
+                ),
+                'description': ' '.join(faker.fake.paragraphs()),
+                'created': str(faker.fake.date_time()),
+                'publish': faker.fake_boolean(),
+            }
+            instance = faker.create(fields)
+            object_list.append(instance)
+        return object_list
+
+
+And then, you also can access it via djipsum command such as below. This should be create **2** objects.
+
+::
+
+    ./manage.py djipsum --auto_gen --custom_generator=app_blog.blogfaker.postfaker --max=2
+
+    # OR
+
+    ./manage.py djipsum -auto -cg=app_blog.blogfaker.postfaker --max=2
+
 
 
 Supported Fields
