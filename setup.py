@@ -11,7 +11,7 @@ setup(
     version=__VERSION__,
     url="https://github.com/agusmakmun/djipsum/",
     download_url="https://github.com/agusmakmun/djipsum/tarball/v{}".format(__VERSION__),
-    description="Django Lorem Ipsum Generator - Command plugin to generate the (fake content data) for Django model.",
+    description="Django Lorem Ipsum Generator - Command plugin to generate (fake content data) for Django model.",
     long_description=open("README.rst").read(),
     license="MIT",
     author=__AUTHOR__,

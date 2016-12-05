@@ -14,7 +14,7 @@ Djipsum
    :target: https://pypi.python.org/pypi/djipsum
 
 
-Django Lorem Ipsum Generator - Command plugin to generate the (fake content data) for Django model, and uses `Faker Factory`_ package for API Faker Model.
+Django Lorem Ipsum Generator - Command plugin to generate (fake content data) for Django model, and uses `Faker Factory`_ package for API Faker Model.
 
 .. image:: http://i.imgur.com/8vg0KoC.png
 
