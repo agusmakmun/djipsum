@@ -215,6 +215,191 @@ Supported Fields
 +-------------------------------+----------------------------+--------------------------+--------------------+
 
 
+Refference Faker Model Fields
+-------------------------------
+
+``fake = <faker.generator.Generator object>``
+    Providing the package from Faker Factory.
+
+``djipsum_fields(self)``
+    Extended from class ``DjipsumFields`` for some special fields.
+
+``fake_binary(self)``
+    Return random binary format.
+    Faker Factory also provide about this binary.
+
+    **Example:**
+
+    ``b"\x00\x01\x02\x03\x04\x05\x06\x07"``, ``b"\x0b\x0c\x0e\x0f"``, etc.
+
+    1. from Djipsum
+    ``faker.fake_binary()``
+
+    2. from Faker Factory
+    ``faker.fake.binary(length=10)``
+
+``fake_chars_or_choice(self, field_name)``
+    Return fake chars or choice it if the ``field_name`` has choices.
+    Then, returning random value from it. This specially for ``CharField``.
+
+    **Usage:**
+
+    ``faker.fake_chars_or_choice('field_name')``
+
+    **Example for field:**
+
+    ::
+
+        TYPE_CHOICES = (
+          ('project', 'I wanna to talk about project'),
+          ('feedback', 'I want to report a bugs or give feedback'),
+          ('hello', 'I just want to say hello')
+        )
+        type = models.CharField(max_length=200, choices=TYPE_CHOICES)
+
+``fake_comma_separated_integer(self)``
+    Return the unique integers in the string.
+    This specially for ``CommaSeparatedIntegerField``.
+
+    **Example:**
+
+    ``'6,1,7'``, ``'4,5,1,3,2'``, ``'2,7,9,3,5,4,1'``
+
+``fake_decimal(self)``
+    Validate if the field has a ``max_digits`` and ``decimal_places``
+    And generating the unique decimal number.
+
+    **Usage:**
+
+    ``faker.fake_decimal('field_name')``
+
+    **Example:**
+
+    ``10.7``, ``13041.00``, ``200.000.000``
+
+``fake_boolean(self)``
+    **Example:**
+
+    ``True, False``
+
+``fake_null_boolean(self)``
+    Faker Factory also provide about this null boolean.
+
+    **Example:**
+
+    ``None``, ``True``, ``False``
+
+    1. from Djipsum
+    ``faker.fake_null_boolean()``
+
+    2. from Faker Factory
+    ``faker.fake.null_boolean()``
+
+``fake_float(self)``
+    **Example:**
+
+    ``0.69``, ``20.55``, ``98.12``
+
+``fake_email(self)``
+    Faker Factory also provide about this email.
+
+    **Example:**
+
+    ``'agus@python.web.id'``, ``'sample@gmail.com'``, ``'hello@yahoo.com'``
+
+    1. from Djipsum
+    ``faker.fake_email()``
+
+    2. from Faker Factory
+    ``faker.fake.email()``
+
+``fake_file(self)``
+    Return string name of file.
+    Faker Factory also provide about this file.
+
+    **Example:**
+
+    ``'file.zip'``, ``'awesomefile.tar.gz'``, ``'samplefile.docx'``, ``'djipsum.pdf'``
+
+    1. from Djipsum
+    ``faker.fake_file()``
+
+    2. from Faker Factory
+    ``faker.fake.file_name()``
+
+``fake_image(self)``
+    Return string name of image.
+
+    **Example:**
+
+    ``'avatar.jpg'``, ``'djipsum.jpeg'``, ``'sampleimage.png'``, ``'awesome_django.gif'``
+
+``fake_ipaddress(self)``
+    Faker Factory also provide about this ipaddress,
+    such as ipv4, ipv6, ...etc
+
+    **Example:**
+
+    ``'192.168.1.1'``, ``'66.249.65.54'``, ``'255.255.255.0'``, ``'2001:db8:a0b:12f0::1'``
+
+    1. from Djipsum
+    ``faker.fake_ipaddress()``
+
+    2. from Faker Factory
+    ``faker.fake.ipv4()``, ``faker.fake.ipv6()``
+
+``fake_slug(self)``
+    Optionall unique slug with ``uuid`` to handle ``unique=True``.
+    Faker Factory also provide about this slug.
+
+    **Example:**
+
+    1. from Djipsum
+    ``faker.fake_slug()``
+
+    2. from Faker Factory
+    ``faker.fake.slug(faker.fake.text(max_nb_chars=50))``
+
+``fake_paragraphs(self)``
+    Generate the paragraphs for ``TextField``.
+    Faker Factory also provide about this paragraphs.
+
+    **Example:**
+
+    1. from Djipsum
+    ``faker.fake_paragraphs()``
+
+    2. from Faker Factory
+    ``' '.join(faker.fake.paragraphs())``
+
+``fake_url(self)``
+    Generate the url for ``URLField``.
+    Faker Factory also provide about this url.
+
+    **Example:**
+
+    1. from Djipsum
+    ``faker.fake_url()``
+
+    2. from Faker Factory
+    ``faker.fake.url()``
+
+``fake_uuid(self)``
+    Generate the unique uuid
+    from ``uuid1``, ``uuid3``, ``uuid4``, or ``uuid5``.
+
+``fake_relations(self, type, field_name)``
+    Return the dictionary of object/s relation
+    to process the Relationship.
+
+    **Example:**
+
+    - Foreign Key:
+        ``faker.fake_relations({'type': 'fk', 'field_name': 'author'})``
+
+    - Many To Many:
+        ``faker.fake_relations({'type': 'm2m', 'field_name': 'categories'})``
+
 License
 ----------------------
 

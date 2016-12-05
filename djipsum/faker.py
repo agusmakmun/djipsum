@@ -93,12 +93,16 @@ class FakerModel(object):
         Then, returning random value from it.
         This specially for `CharField`.
 
+        Usage:
+            faker.fake_chars_or_choice('field_name')
+
         Example for field:
             TYPE_CHOICES = (
               ('project', 'I wanna to talk about project'),
               ('feedback', 'I want to report a bugs or give feedback'),
               ('hello', 'I just want to say hello')
             )
+            type = models.CharField(max_length=200, choices=TYPE_CHOICES)
         """
         return self.djipsum_fields().randomCharField(
             self.model_class(),
@@ -115,10 +119,13 @@ class FakerModel(object):
         """
         return self.djipsum_fields().randomCommaSeparatedIntegerField()
 
-    def fake_decimal(self):
+    def fake_decimal(self, field_name):
         """
         Validate if the field has a `max_digits` and `decimal_places`
         And generating the unique decimal number.
+
+        Usage:
+            faker.fake_decimal('field_name')
 
         Example:
             10.7, 13041.00, 200.000.000
@@ -210,7 +217,7 @@ class FakerModel(object):
 
     def fake_slug(self):
         """
-        Optionall unique slug with uuid.
+        Optionall unique slug with `uuid` to handle `unique=True.
         Faker Factory also provide about this slug.
 
         Example:
@@ -261,9 +268,15 @@ class FakerModel(object):
         Return the dictionary of object/s relation
         to process the Relationship.
 
-        Example Output:
-            {'type': 'fk', 'field_name': 'author'}, or
-            {'type': 'm2m', 'field_name': 'categories'}
+        Example:
+            # Foreign Key
+            faker.fake_relations(
+                {'type': 'fk', 'field_name': 'author'},
+            )
+            # Many To Many
+            faker.fake_relations(
+                {'type': 'm2m', 'field_name': 'categories'}
+            )
         """
         return {
             'type': type.lower(),
