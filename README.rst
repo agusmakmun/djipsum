@@ -232,11 +232,11 @@ Refference Faker Model Fields
 
     ``b"\x00\x01\x02\x03\x04\x05\x06\x07"``, ``b"\x0b\x0c\x0e\x0f"``, etc.
 
-    1. from Djipsum
-    ``faker.fake_binary()``
+    - from Djipsum
+        ``faker.fake_binary()``
 
-    2. from Faker Factory
-    ``faker.fake.binary(length=10)``
+    - from Faker Factory
+        ``faker.fake.binary(length=10)``
 
 ``fake_chars_or_choice(self, field_name)``
     Return fake chars or choice it if the ``field_name`` has choices.
@@ -265,7 +265,7 @@ Refference Faker Model Fields
 
     ``'6,1,7'``, ``'4,5,1,3,2'``, ``'2,7,9,3,5,4,1'``
 
-``fake_decimal(self)``
+``fake_decimal(self, field_name)``
     Validate if the field has a ``max_digits`` and ``decimal_places``
     And generating the unique decimal number.
 
@@ -289,11 +289,11 @@ Refference Faker Model Fields
 
     ``None``, ``True``, ``False``
 
-    1. from Djipsum
-    ``faker.fake_null_boolean()``
+    - from Djipsum
+        ``faker.fake_null_boolean()``
 
-    2. from Faker Factory
-    ``faker.fake.null_boolean()``
+    - from Faker Factory
+        ``faker.fake.null_boolean()``
 
 ``fake_float(self)``
     **Example:**
@@ -307,11 +307,11 @@ Refference Faker Model Fields
 
     ``'agus@python.web.id'``, ``'sample@gmail.com'``, ``'hello@yahoo.com'``
 
-    1. from Djipsum
-    ``faker.fake_email()``
+    - from Djipsum
+        ``faker.fake_email()``
 
-    2. from Faker Factory
-    ``faker.fake.email()``
+    - from Faker Factory
+        ``faker.fake.email()``
 
 ``fake_file(self)``
     Return string name of file.
@@ -321,11 +321,11 @@ Refference Faker Model Fields
 
     ``'file.zip'``, ``'awesomefile.tar.gz'``, ``'samplefile.docx'``, ``'djipsum.pdf'``
 
-    1. from Djipsum
-    ``faker.fake_file()``
+    - from Djipsum
+        ``faker.fake_file()``
 
-    2. from Faker Factory
-    ``faker.fake.file_name()``
+    - from Faker Factory
+        ``faker.fake.file_name()``
 
 ``fake_image(self)``
     Return string name of image.
@@ -342,11 +342,11 @@ Refference Faker Model Fields
 
     ``'192.168.1.1'``, ``'66.249.65.54'``, ``'255.255.255.0'``, ``'2001:db8:a0b:12f0::1'``
 
-    1. from Djipsum
-    ``faker.fake_ipaddress()``
+    - from Djipsum
+        ``faker.fake_ipaddress()``
 
-    2. from Faker Factory
-    ``faker.fake.ipv4()``, ``faker.fake.ipv6()``
+    - from Faker Factory
+        ``faker.fake.ipv4()``, ``faker.fake.ipv6()``
 
 ``fake_slug(self)``
     Optionall unique slug with ``uuid`` to handle ``unique=True``.
@@ -354,11 +354,13 @@ Refference Faker Model Fields
 
     **Example:**
 
-    1. from Djipsum
-    ``faker.fake_slug()``
+    ``this-my-slug``, ``hello-world-93daf03138dsa0``
 
-    2. from Faker Factory
-    ``faker.fake.slug(faker.fake.text(max_nb_chars=50))``
+    - from Djipsum
+        ``faker.fake_slug()``
+
+    - from Faker Factory
+        ``faker.fake.slug(faker.fake.text(max_nb_chars=50))``
 
 ``fake_paragraphs(self)``
     Generate the paragraphs for ``TextField``.
@@ -366,11 +368,11 @@ Refference Faker Model Fields
 
     **Example:**
 
-    1. from Djipsum
-    ``faker.fake_paragraphs()``
+    - from Djipsum
+        ``faker.fake_paragraphs()``
 
-    2. from Faker Factory
-    ``' '.join(faker.fake.paragraphs())``
+    - from Faker Factory
+        ``' '.join(faker.fake.paragraphs())``
 
 ``fake_url(self)``
     Generate the url for ``URLField``.
@@ -378,15 +380,21 @@ Refference Faker Model Fields
 
     **Example:**
 
-    1. from Djipsum
-    ``faker.fake_url()``
+    ``https://python.web.id``, ``http://dracos-linux.org``
 
-    2. from Faker Factory
-    ``faker.fake.url()``
+    - from Djipsum
+        ``faker.fake_url()``
+
+    - from Faker Factory
+        ``faker.fake.url()``
 
 ``fake_uuid(self)``
     Generate the unique uuid
     from ``uuid1``, ``uuid3``, ``uuid4``, or ``uuid5``.
+
+    **Example:**
+
+    ``fb3d6e7f82db47dcaaca46bdd82b24a5``, ``886313e13b8a53729b900c9aee199e5d``
 
 ``fake_relations(self, type, field_name)``
     Return the dictionary of object/s relation
@@ -395,10 +403,10 @@ Refference Faker Model Fields
     **Example:**
 
     - Foreign Key:
-        ``faker.fake_relations({'type': 'fk', 'field_name': 'author'})``
+        ``faker.fake_relations(type='fk', field_name='author'})``
 
     - Many To Many:
-        ``faker.fake_relations({'type': 'm2m', 'field_name': 'categories'})``
+        ``faker.fake_relations(type='m2m', field_name='categories')``
 
 License
 ----------------------

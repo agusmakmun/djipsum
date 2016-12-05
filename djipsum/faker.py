@@ -221,6 +221,8 @@ class FakerModel(object):
         Faker Factory also provide about this slug.
 
         Example:
+            `this-my-slug`, `hello-world-93daf03138dsa0`
+
         1. from Djipsum
             faker.fake_slug()
         2. from Faker Factory
@@ -249,6 +251,8 @@ class FakerModel(object):
         Faker Factory also provide about this url.
 
         Example:
+            `https://python.web.id`, `http://dracos-linux.org`
+
         1. from Djipsum
             faker.fake_url()
         2. from Faker Factory
@@ -260,6 +264,9 @@ class FakerModel(object):
         """
         Generate the unique uuid
         from uuid1, uuid3, uuid4, or uuid5.
+
+        Example:
+            `fb3d6e7f82db47dcaaca46bdd82b24a5`, `886313e13b8a53729b900c9aee199e5d
         """
         return self.djipsum_fields().randomUUIDField()
 
@@ -270,13 +277,10 @@ class FakerModel(object):
 
         Example:
             # Foreign Key
-            faker.fake_relations(
-                {'type': 'fk', 'field_name': 'author'},
-            )
+            faker.fake_relations(type='fk', field_name='author')
+
             # Many To Many
-            faker.fake_relations(
-                {'type': 'm2m', 'field_name': 'categories'}
-            )
+            faker.fake_relations(type='m2m', field_name='categories')
         """
         return {
             'type': type.lower(),
