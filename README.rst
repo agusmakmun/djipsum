@@ -134,7 +134,7 @@ For example i need to save this script into file of ``app_blog.blogfaker.py``
 
     def postfaker(maximum=10):
         """
-        Sample custom class generator.
+        Sample custom generator.
         Djipsum already handled with `--max` command.
         But, recomended to set default integer `maximum` like above.
         """
