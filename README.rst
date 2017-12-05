@@ -403,7 +403,7 @@ Refference Faker Model Fields
     **Example:**
 
     - Foreign Key:
-        ``faker.fake_relations(type='fk', field_name='author'})``
+        ``faker.fake_relations(type='fk', field_name='author')``
 
     - Many To Many:
         ``faker.fake_relations(type='m2m', field_name='categories')``

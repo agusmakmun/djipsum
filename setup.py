@@ -16,7 +16,11 @@ setup(
     license="MIT",
     author=__AUTHOR__,
     author_email=__AUTHOR_EMAIL__,
-    keywords=["Djipsum", "Django Ipsum", "Django Lorem Ipsum", "Django Model"],
+    keywords=[
+        "djipsum", "django fake content data",
+        "django lorem ipsum generator",
+        "django unitest tool"
+    ],
     zip_safe=False,
     include_package_data=True,
     install_requires=["Django>=1.10.1", "Faker>=0.7.3"],
